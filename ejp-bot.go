@@ -93,6 +93,7 @@ func main(){
         var p EJPResponse = getEJPResponse()
         fmt.Println(ExtractCorrectRegion(p,reg))
         time.Sleep(10*time.Second)
+        fmt.Println("test")
     }
 
 }

@@ -22,9 +22,10 @@ You can then compile the program with :
 
 Optionnal : Static linking
 
-Windows target : 
+- Windows target : 
 `env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build ./ejp-bot.go`
-For Linux target : 
+
+- For Linux target : 
 `env CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build ./ejp-bot.go`
 
 

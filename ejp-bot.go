@@ -69,6 +69,14 @@ func ExtractCorrectRegion(p EJPResponse, region string) (string,string){
     }
 }
 
+func IsEJPToday(s1 string, s2 string) bool{
+    return strings.ToUpper(s1) == "EJP"
+}
+
+func IsEJPTomorrow(s1 string, s2 string) bool{
+    return strings.ToUpper(s2) == "EJP"
+}
+
 func main(){
     var refresh int
     var err error
@@ -91,7 +99,24 @@ func main(){
     fmt.Println("Refreshing every ", refresh, "seconds")
     for {
         var p EJPResponse = getEJPResponse()
-        fmt.Println(ExtractCorrectRegion(p,reg))
+        s1, s2 := ExtractCorrectRegion(p,reg)
+
+        fmt.Printf("\n")
+        if IsEJPToday(s1, s2) {
+            fmt.Printf("[%s] It's EJP today\n", time.Now())
+            //Todo : run correct command
+        } else {
+            fmt.Printf("[%s] It's not EJP today\n",time.Now())
+        }
+
+        if IsEJPTomorrow(s1, s2) {
+            fmt.Printf("[%s] It will be EJP tomorrow\n",time.Now())
+            //Todo : run correct command
+        } else {
+            fmt.Printf("[%s] It will not be EJP tomorrow", time.Now())
+        }
+
+
         if refresh >= 0 {
             time.Sleep(time.Duration(refresh * int(time.Second)))
         }else{

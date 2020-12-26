@@ -92,8 +92,11 @@ func main(){
     for {
         var p EJPResponse = getEJPResponse()
         fmt.Println(ExtractCorrectRegion(p,reg))
-        time.Sleep(10*time.Second)
-        fmt.Println("test")
+        if refresh >= 0 {
+            time.Sleep(time.Duration(refresh * int(time.Second)))
+        }else{
+            break
+        }
     }
 
 }

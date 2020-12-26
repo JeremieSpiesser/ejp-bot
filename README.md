@@ -9,9 +9,9 @@ ejp-bot <region> <delay>
 ```
 
 - region : "nord", "sud", "paca" or "ouest"
-- delay : refreshing delay in seconds ()
+- delay : refreshing delay in seconds ( expecting a positive integer )
 
-If delay equals -1, the bot runs in "oneshot mode" (ie : it will not loop and immediately return)
+If delay equals -1, the bot runs in "oneshot mode" (ie : it will not loop and immediately return and run the commands)
 
 ## Compilation
 
@@ -31,3 +31,4 @@ For Linux target :
 ## TODO
 
 - command to be ran when it's EJP or not, today or tomorrow
+    - figure out how to get these commands : json config ? arguments ?

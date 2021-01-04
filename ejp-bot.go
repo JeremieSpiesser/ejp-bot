@@ -35,6 +35,7 @@ type EJPResponse struct {
 
 func getEJPResponse() EJPResponse{
     var strDate = time.Now().Format("2006-01-02")
+    fmt.Println(strDate)
     var url = fmt.Sprintf("https://particulier.edf.fr/bin/edf_rc/servlets/ejptemponew?Date_a_remonter=%s&TypeAlerte=EJP",strDate)
     client := &http.Client{}
     req, err := http.NewRequest("GET",url,nil)
@@ -70,11 +71,20 @@ func ExtractCorrectRegion(p EJPResponse, region string) (string,string){
 }
 
 func IsEJPToday(s1 string, s2 string) bool{
-    return strings.ToUpper(s1) == "EJP"
+    return strings.ToUpper(s1) == "EST_EJP"
 }
 
+func IsNDToday(s1 string, s2 string) bool{
+    return strings.ToUpper(s1) == "ND"
+}
+
+
 func IsEJPTomorrow(s1 string, s2 string) bool{
-    return strings.ToUpper(s2) == "EJP"
+    return strings.ToUpper(s2) == "EST_EJP"
+}
+
+func IsNDTomorrow(s1 string, s2 string) bool{
+    return strings.ToUpper(s2) == "ND"
 }
 
 func main(){
@@ -105,16 +115,22 @@ func main(){
         if IsEJPToday(s1, s2) {
             fmt.Printf("[%s] It's EJP today\n", time.Now())
             //Todo : run correct command
+        } else if IsNDToday(s1,s2) {
+            fmt.Printf("[%s] Undefined for today\n",time.Now())
         } else {
             fmt.Printf("[%s] It's not EJP today\n",time.Now())
         }
 
+
         if IsEJPTomorrow(s1, s2) {
             fmt.Printf("[%s] It will be EJP tomorrow\n",time.Now())
             //Todo : run correct command
+        } else if IsNDTomorrow(s1,s2){
+            fmt.Printf("[%s] Undefined for tomorrow", time.Now())
         } else {
             fmt.Printf("[%s] It will not be EJP tomorrow", time.Now())
         }
+
 
 
         if refresh >= 0 {
